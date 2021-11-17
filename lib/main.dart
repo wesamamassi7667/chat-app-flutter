@@ -1,8 +1,17 @@
+import 'package:chat_app/helper/util_shared_preferences.dart';
 import 'package:chat_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:chat_app/provider/auth_model.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UtilSharedPreference.load();
+  runApp(ChangeNotifierProvider(
+      create: (BuildContext context) => AuthModel(
+
+      ),
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
