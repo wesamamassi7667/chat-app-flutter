@@ -1,4 +1,5 @@
 import 'package:chat_app/helper/util_shared_preferences.dart';
+import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/home_screen.dart';
 import 'package:chat_app/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash':(context)=>SplashScreen(),
         '/login':(context)=>LoginScreen(),
+        '/chat':(context)=>ChatScreen(),
+
         '/home':(context)=>HomeScreen(),
       },
     );
