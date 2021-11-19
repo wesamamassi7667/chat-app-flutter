@@ -20,22 +20,17 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:Column(
-          children: [
-            Icon(
+           child: Icon(
                 Icons.chat_rounded,
-                size: 50,
+                size: 100,
             ),
-
-          ],
-        ),
       ),
     );
   }
 
-  void _checkSignedIn() {
-   AuthModel _authModel=context.read<AuthModel>();
-   if(_authModel.isLoggedIn()){
+  Future<void> _checkSignedIn() async {
+   AuthProvider _authProvider=context.read<AuthProvider>();
+   if(await _authProvider.isLoggedIn()){
      Navigator.pushReplacementNamed(context, '/home');
    }
    else{
