@@ -1,4 +1,5 @@
 
+import 'package:chat_app/components/app_bar.dart';
 import 'package:chat_app/components/my_progress_indicator.dart';
 import 'package:chat_app/provider/auth_model.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,8 @@ class LoginScreen extends StatelessWidget {
 
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),
-        centerTitle: true,
+      appBar: AppBarComponent(
+        title: 'Login',
       ),
       body: Stack(
         children: [

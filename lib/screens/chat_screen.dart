@@ -1,3 +1,4 @@
+import 'package:chat_app/components/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 class ChatScreen extends StatelessWidget {
@@ -6,9 +7,8 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        centerTitle: true,
+      appBar: AppBarComponent(
+
       ),
       body: ListView.builder(
         itemCount: 10,
@@ -26,3 +26,5 @@ class ChatScreen extends StatelessWidget {
     );
   }
 }
+
+
