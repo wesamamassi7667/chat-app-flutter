@@ -6,12 +6,15 @@ class UserChat {
   String aboutMe;
 
   UserChat(this.id, this.photoUrl, this.displayName, this.aboutMe);
-  factory UserChat.fromDocument(DocumentSnapshot document) => UserChat(
+  factory UserChat.fromDocument(DocumentSnapshot document) {
+    return UserChat(
+
         document["id"] as String,
         document["photoUrl"] as String,
         document["displayName"] as String,
         document["AboutMe"] as String,
       );
+  }
     Map<String,dynamic> $UserToDocument(UserChat userChat)=>
        <String,dynamic> {
           "id":userChat.id,

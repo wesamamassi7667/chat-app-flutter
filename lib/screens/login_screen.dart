@@ -39,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                 onPressed: () async {
                  bool success=await _authProvider.signWithGoogle();
                  if(success){
-                   Navigator.pushNamed(context, '/home');
+                   Navigator.pushReplacementNamed(context, '/home');
                  }
 
                 },

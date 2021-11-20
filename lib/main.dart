@@ -1,4 +1,5 @@
 import 'package:chat_app/helper/util_shared_preferences.dart';
+import 'package:chat_app/provider/home_provider.dart';
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/home_screen.dart';
 import 'package:chat_app/screens/splash_screen.dart';
@@ -11,18 +12,29 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await UtilSharedPreference.load();
-  runApp(ChangeNotifierProvider(
-      create: (BuildContext context) => AuthProvider(
-        firebaseFirestore: FirebaseFirestore.instance,
-        googleSignIn: GoogleSignIn(),
-        firebaseAuth: FirebaseAuth.instance,
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (BuildContext context) => AuthProvider(
+          firebaseFirestore: FirebaseFirestore.instance,
+          googleSignIn: GoogleSignIn(),
+          firebaseAuth: FirebaseAuth.instance,
+        ),
       ),
-      child: MyApp()));
+      Provider(
+        create: (BuildContext context) => HomeProvider(
+          firebaseFirestore: FirebaseFirestore.instance,
+
+        ),
+      ),
+
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -45,14 +57,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/splash',
       routes: {
-        '/splash':(context)=>SplashScreen(),
-        '/login':(context)=>LoginScreen(),
-        '/chat':(context)=>ChatScreen(),
-
-        '/home':(context)=>HomeScreen(),
+        '/splash': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(),
+        '/chat': (context) => ChatScreen(),
+        '/home': (context) => HomeScreen(),
       },
     );
   }
 }
-
-
