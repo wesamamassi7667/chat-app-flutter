@@ -30,6 +30,8 @@ Future<void> main() async {
       ),
       Provider(
         create: (BuildContext context) => ChatProvider(
+          firebaseFirestore: FirebaseFirestore.instance,
+
         ),
       ),
 
