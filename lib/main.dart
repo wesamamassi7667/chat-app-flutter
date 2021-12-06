@@ -1,12 +1,10 @@
 import 'package:chat_app/helper/util_shared_preferences.dart';
+import 'package:chat_app/provider/chat_provider.dart';
 import 'package:chat_app/provider/home_provider.dart';
-import 'package:chat_app/screens/chat_screen.dart';
-import 'package:chat_app/screens/home_screen.dart';
-import 'package:chat_app/screens/splash_screen.dart';
+import 'package:chat_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_app/provider/auth_model.dart';
-import 'package:chat_app/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,9 +26,13 @@ Future<void> main() async {
       Provider(
         create: (BuildContext context) => HomeProvider(
           firebaseFirestore: FirebaseFirestore.instance,
-
         ),
       ),
+      Provider(
+        create: (BuildContext context) => ChatProvider(
+        ),
+      ),
+
 
     ],
     child: MyApp(),
@@ -56,10 +58,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: '/splash',
+      onGenerateRoute: (setting){
+        if(setting.name=='/chat'){
+          final arguments = setting.arguments as Map;
+          return MaterialPageRoute(builder: (_)=>ChatScreen(userId:arguments['id'],userAvatar:arguments['avatar'] ,userNickname:arguments['name']));
+        }
+      },
       routes: {
         '/splash': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
-        '/chat': (context) => ChatScreen(),
         '/home': (context) => HomeScreen(),
       },
     );

@@ -8,7 +8,9 @@ import '../constant.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+
+  final  _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class LoginScreen extends StatelessWidget {
 
     }
     return Scaffold(
+      key:_scaffoldKey,
       appBar: AppBarComponent(
         title: 'Login',
       ),
@@ -74,14 +77,12 @@ class LoginScreen extends StatelessWidget {
   }
 
   void _showMessage(String s,context) {
-    ScaffoldMessenger.of(context).showSnackBar(
+    _scaffoldKey.currentState!.showSnackBar(
       SnackBar(content:Text(s),
         behavior: SnackBarBehavior.floating,
       )
     );
   }
-
-
 }
 
 
