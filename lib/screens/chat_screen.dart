@@ -2,10 +2,16 @@ import 'package:chat_app/components/app_bar.dart';
 import 'package:chat_app/constant.dart';
 import 'package:chat_app/provider/auth_model.dart';
 import 'package:chat_app/provider/chat_provider.dart';
-import 'package:chat_app/widget/send_message_field.dart';
+import 'package:chat_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:bubble/bubble.dart';
+
+
+enum TypeMessage {
+  text,
+  image,
+  sticker,
+}
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen(
@@ -24,6 +30,8 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   late String currentUserId, chatId;
+  final TextEditingController textEditingController = TextEditingController();
+
 
   @override
   void initState() {
@@ -55,17 +63,15 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: 10,
               padding: EdgeInsets.all(15),
               itemBuilder: (context,index){
-                return Bubble(
-                  margin: BubbleEdges.only(top: 10),
-                  stick: true, //false min width
-                  nip: BubbleNip.rightTop,
-                  color: index.isOdd?Color.fromRGBO(212, 234, 244, 1.0):null,
-                  child: Text('Hello, World!', textAlign: TextAlign.start),
-                );
+                return MessageChat(textMessage: 'llllllllknoin opij', color: Color.fromRGBO(212, 234, 244, 1.0), time: '2:66 pm');
               },
             ),
           ),
-          SendMessageField()
+          SendMessageField(
+             textEditingController:textEditingController,
+             press: ()=>_sendMessage(),
+
+          )
 
 
 
@@ -73,5 +79,9 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       )
     );
+  }
+
+  _sendMessage() {
+
   }
 }

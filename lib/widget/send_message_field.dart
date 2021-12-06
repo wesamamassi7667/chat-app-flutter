@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SendMessageField extends StatelessWidget {
-  const SendMessageField({Key? key}) : super(key: key);
+  const SendMessageField({Key? key, required this.textEditingController,required this.press})
+      : super(key: key);
+  final TextEditingController textEditingController;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +50,7 @@ class SendMessageField extends StatelessWidget {
                           // controller: _textMessageController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Type a message",
+                            hintText: "Type a message...",
                           ),
                         ),
                       ),
@@ -66,26 +70,20 @@ class SendMessageField extends StatelessWidget {
           SizedBox(
             width: 8,
           ),
-          InkWell(
-            onTap: () {
-              // if (_textMessageController.text.isNotEmpty) {
-              //   _sendTextMessage();
-              // }
-            },
-            child: Container(
-              height: 45,
-              width: 45,
-              decoration: BoxDecoration(
-                // color: primaryColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50),
-                ),
-              ),
+          Container(
+            width: 40,
+            height: 40,
+
+            child:TextButton(
+
               child: Icon(
                 Icons.send,
+                color: Colors.black,
               ),
+
+              onPressed:press,
             ),
-          )
+          ),
         ],
       ),
     );
