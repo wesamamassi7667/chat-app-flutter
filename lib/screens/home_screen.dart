@@ -4,8 +4,8 @@ import 'package:chat_app/components/app_bar.dart';
 import 'package:chat_app/constant.dart';
 import 'package:chat_app/helper/utils.dart';
 import 'package:chat_app/models/user.dart';
-import 'package:chat_app/provider/auth_model.dart';
-import 'package:chat_app/provider/home_provider.dart';
+import 'package:chat_app/provider/providers.dart';
+
 import 'package:chat_app/widget/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

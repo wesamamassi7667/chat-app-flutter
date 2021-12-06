@@ -19,6 +19,7 @@ class HomeProvider {
     print("home");
 
     if (searchText.isNotEmpty) {
+      // return document inside collection
       return firebaseFirestore
           .collection(collection)
           .where('displayName', isGreaterThanOrEqualTo: searchText.trim())

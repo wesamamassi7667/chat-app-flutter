@@ -1,10 +1,9 @@
 import 'package:chat_app/helper/util_shared_preferences.dart';
-import 'package:chat_app/provider/chat_provider.dart';
-import 'package:chat_app/provider/home_provider.dart';
+import 'package:chat_app/provider/providers.dart';
+
 import 'package:chat_app/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:chat_app/provider/auth_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

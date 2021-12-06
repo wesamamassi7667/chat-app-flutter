@@ -44,8 +44,8 @@ class SendMessageField extends StatelessWidget {
                       ),
                       child: Scrollbar(
                         child: TextField(
-                          maxLines: null,
-                          //null make keyboard data type is newline
+                          maxLines: null, //null make keyboard data type is newline
+                          controller: textEditingController,
                           style: TextStyle(fontSize: 14),
                           // controller: _textMessageController,
                           decoration: InputDecoration(

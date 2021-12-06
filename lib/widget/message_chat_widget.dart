@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
-class MessageChat extends StatelessWidget {
-  const MessageChat({Key? key,required this.textMessage,  this.color,required this.time,
+class MessageChatWidget extends StatelessWidget {
+  const MessageChatWidget({Key? key,required this.textMessage,  this.color,required this.time,
     this.crossAlign=CrossAxisAlignment.start, this.nip=BubbleNip.rightTop}) : super(key: key);
    final String textMessage,time;
    final Color? color;
