@@ -2,8 +2,10 @@ import 'package:chat_app/components/app_bar.dart';
 import 'package:chat_app/constant.dart';
 import 'package:chat_app/provider/auth_model.dart';
 import 'package:chat_app/provider/chat_provider.dart';
+import 'package:chat_app/widget/send_message_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:bubble/bubble.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen(
@@ -46,6 +48,30 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBarComponent(
         title: widget.userNickname,
       ),
+      body:Column(
+        children: [
+          Flexible(
+            child: ListView.builder(
+              itemCount: 10,
+              padding: EdgeInsets.all(15),
+              itemBuilder: (context,index){
+                return Bubble(
+                  margin: BubbleEdges.only(top: 10),
+                  stick: true, //false min width
+                  nip: BubbleNip.rightTop,
+                  color: index.isOdd?Color.fromRGBO(212, 234, 244, 1.0):null,
+                  child: Text('Hello, World!', textAlign: TextAlign.start),
+                );
+              },
+            ),
+          ),
+          SendMessageField()
+
+
+
+
+        ],
+      )
     );
   }
 }
