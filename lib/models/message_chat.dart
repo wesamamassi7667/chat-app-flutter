@@ -1,4 +1,6 @@
+import 'package:chat_app/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class MessageChat {
   String idFrom;
@@ -6,9 +8,11 @@ class MessageChat {
   String timestamp;
   String content;
   int type;
+  final MessageTypeEnum? messageType;
 
 
-  MessageChat(this.idFrom, this.idTo, this.timestamp, this.content, this.type);
+
+  MessageChat(this.idFrom, this.idTo, this.timestamp, this.content, this.type,{this.messageType});
 
   Map<String, dynamic> toJson() {
     return {
@@ -27,6 +31,9 @@ class MessageChat {
       document["timestamp"] as String,
       document["content"] as String,
       document["type"] as int,
+      messageType: MessageType.fromValue(
+          document["type"] as int
+      ).type
 
     );
   }

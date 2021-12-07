@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SendMessageField extends StatelessWidget {
-  const SendMessageField({Key? key, required this.textEditingController,required this.press})
+  const SendMessageField({Key? key, required this.textEditingController,required this.press,  this.pressCamera, this.isPreview=false})
       : super(key: key);
   final TextEditingController textEditingController;
   final VoidCallback press;
+  final bool isPreview;
+  final VoidCallback? pressCamera;
+
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class SendMessageField extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Icon(
+                 isPreview?SizedBox.shrink(): Icon(
                     Icons.insert_emoticon,
                     color: Colors.grey[500],
                   ),
@@ -44,13 +47,15 @@ class SendMessageField extends StatelessWidget {
                       ),
                       child: Scrollbar(
                         child: TextField(
+                          enableInteractiveSelection: true,
                           maxLines: null, //null make keyboard data type is newline
                           controller: textEditingController,
                           style: TextStyle(fontSize: 14),
                           // controller: _textMessageController,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Type a message...",
+                            isDense: true,
+                            hintText: isPreview?"Add a caption...":"Type a message...",
                           ),
                         ),
                       ),
@@ -59,10 +64,7 @@ class SendMessageField extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  Icon(Icons.camera_alt),
-                  SizedBox(
-                    width: 15,
-                  ),
+                 isPreview?SizedBox.shrink(): CupertinoButton(child: Icon(Icons.camera_alt,color: Colors.black87 ),onPressed: pressCamera,padding:EdgeInsets.zero,),
                 ],
               ),
             ),
@@ -70,20 +72,7 @@ class SendMessageField extends StatelessWidget {
           SizedBox(
             width: 8,
           ),
-          Container(
-            width: 40,
-            height: 40,
-
-            child:TextButton(
-
-              child: Icon(
-                Icons.send,
-                color: Colors.black,
-              ),
-
-              onPressed:press,
-            ),
-          ),
+          CupertinoButton(child:  Icon(Icons.send,color: isPreview?Colors.white:Colors.black87,),onPressed: (){},padding:EdgeInsets.zero,),
         ],
       ),
     );

@@ -65,6 +65,10 @@ class MyApp extends StatelessWidget {
           final arguments = setting.arguments as Map;
           return MaterialPageRoute(builder: (_)=>ChatScreen(userId:arguments['id'],userAvatar:arguments['avatar'] ,userNickname:arguments['name']));
         }
+        else if(setting.name=='/previewImage'){
+          final arguments = setting.arguments as String;
+          return MaterialPageRoute(builder: (_)=>PreviewImageScreen(path:arguments));
+        }
       },
       routes: {
         '/splash': (context) => SplashScreen(),

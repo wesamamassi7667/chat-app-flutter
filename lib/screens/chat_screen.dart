@@ -1,3 +1,4 @@
+
 import 'package:chat_app/components/app_bar.dart';
 import 'package:chat_app/constant.dart';
 import 'package:chat_app/models/message_chat.dart';
@@ -5,16 +6,10 @@ import 'package:chat_app/provider/providers.dart';
 import 'package:chat_app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/models/models.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
-
-enum TypeMessage {
-  text,
-  image,
-  sticker,
-}
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen(
@@ -35,8 +30,9 @@ class _ChatScreenState extends State<ChatScreen> {
   late String currentUserId, chatId;
   late ChatProvider _chatProvider;
   final TextEditingController _controller = TextEditingController();
-  var _limit =10;
+  var _limit =20;
   final ScrollController listScrollController = ScrollController();
+  XFile? _image;
 
 
 
@@ -80,18 +76,19 @@ class _ChatScreenState extends State<ChatScreen> {
                     reverse: true,
                     itemBuilder: (context,index){
                       QueryDocumentSnapshot _document=_listMessage[index];
-                        MessageChat message=MessageChat.fromDocument(_document);
-                        print("soma "+currentUserId);
-                      print("soma "+message.idFrom);
-
+                      MessageChat message=MessageChat.fromDocument(_document,);
                       if(message.idFrom==currentUserId){
-                          return MessageChatWidget(textMessage: message.content, color: Color.fromRGBO(225, 255, 199, 1.0), time: '2:66 pm');
+                        return message.messageType==MessageTypeEnum.text?
+                        MessageChatWidget(textMessage: message.content, color: Color.fromRGBO(225, 255, 199, 1.0), time: '2:66 pm'):
+                         Material(
+                          clipBehavior: Clip.hardEdge,
 
-                        }
+                         );
+
+                      }
                         else{
-                          print("soma");
                           return MessageChatWidget(textMessage: message.content, time: '2:66 pm');}
-                    },
+                        },
                   );
 
                 }
@@ -109,6 +106,8 @@ class _ChatScreenState extends State<ChatScreen> {
           SendMessageField(
              textEditingController:_controller,
              press: ()=>_sendMessage(_controller.text),
+            pressCamera:() =>_getImages(),
+
           )
 
 
@@ -126,6 +125,17 @@ class _ChatScreenState extends State<ChatScreen> {
       listScrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
     } else {
       // Fluttertoast.showToast(msg: 'Nothing to send', backgroundColor: ColorConstants.greyColor);
+    }
+  }
+
+  _getImages() async {
+    final ImagePicker _picker = ImagePicker(
+
+    );
+    XFile? pickedFile;
+    pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if(pickedFile!=null){
+    Navigator.pushNamed(context, '/previewImage',arguments: pickedFile.path);
     }
   }
 }
