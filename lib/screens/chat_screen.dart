@@ -32,7 +32,6 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
   var _limit =20;
   final ScrollController listScrollController = ScrollController();
-  XFile? _image;
 
 
 
@@ -82,12 +81,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         MessageChatWidget(textMessage: message.content, color: Color.fromRGBO(225, 255, 199, 1.0), time: '2:66 pm'):
                          Material(
                           clipBehavior: Clip.hardEdge,
-
                          );
-
                       }
                         else{
-                          return MessageChatWidget(textMessage: message.content, time: '2:66 pm');}
+                          return MessageChatWidget(textMessage: message.content, time: '2:66 pm',color: Colors.white,);}
                         },
                   );
 
@@ -107,12 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
              textEditingController:_controller,
              press: ()=>_sendMessage(_controller.text),
             pressCamera:() =>_getImages(),
-
           )
-
-
-
-
         ],
       )
     );
@@ -123,8 +115,6 @@ class _ChatScreenState extends State<ChatScreen> {
       _controller.clear();
       _chatProvider.sendMessage(content, 0, chatId, currentUserId, widget.userId);
       listScrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
-    } else {
-      // Fluttertoast.showToast(msg: 'Nothing to send', backgroundColor: ColorConstants.greyColor);
     }
   }
 

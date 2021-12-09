@@ -1,5 +1,6 @@
 import 'package:chat_app/helper/util_shared_preferences.dart';
 import 'package:chat_app/provider/providers.dart';
+import 'package:chat_app/examples/canav.dart';
 
 import 'package:chat_app/screens/screens.dart';
 import 'package:flutter/material.dart';
@@ -70,10 +71,12 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(builder: (_)=>PreviewImageScreen(path:arguments));
         }
       },
+
       routes: {
         '/splash': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(),
         '/home': (context) => HomeScreen(),
+
       },
     );
   }

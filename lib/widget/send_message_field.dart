@@ -72,7 +72,7 @@ class SendMessageField extends StatelessWidget {
           SizedBox(
             width: 8,
           ),
-          CupertinoButton(child:  Icon(Icons.send,color: isPreview?Colors.white:Colors.black87,),onPressed: (){},padding:EdgeInsets.zero,),
+          CupertinoButton(child:  Icon(Icons.send,color: isPreview?Colors.white:Colors.black87,),onPressed: press,padding:EdgeInsets.zero,),
         ],
       ),
     );
